@@ -1,0 +1,89 @@
+section
+	h2 Immutability in JS isn't new stuff.
+	span.fragment In fact it's been on ECMAScript since 1997 [1]
+	img.fragment(src="img/string-split-97.png")
+	small: a(href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf") [1] ECMAScript: A general purpose, cross-platform programming language  
+section
+	h2 All JS Primitives are Immutable.
+section
+	h3 Strings
+	pre
+		code
+			|  let name = "Paulo Escobar";
+			|  name[2] = "b";
+			|  console.log(name); // Paulo Escobar
+section
+	h3 Numbers 
+	pre
+		code
+			|  let num1 = 2;
+			|  let num2 = 3;
+			|  num2 - num1
+			|  console.log(num2); // 3
+section
+	h3 Boolean
+	pre
+		code
+			|  let truthful = true;
+			|  truthful.length = 4; 
+			|  console.log(truthful); // true
+
+section
+	h3 Symbols
+	pre
+		code
+			|  let martha = Symbol('batSignal');
+			|  martha.toString(); 
+			|  console.log(truthful); // 'Symbol(batSignal)' (String)
+
+section
+	h3 Arrays
+	h5: i Well, Arrays...
+	pre
+		code
+			|  let oddNumsToTen = [1, 3, 5, 7, 8, 9];
+			|  let oddNumsToEleven = oddNumsToTen.push(11); 
+			|  console.log(oddNumsToTen); // [1, 3, 5, 7, 8, 9, 11]
+section(data-background-image="img/no.gif")
+	section(data-background-color="rgba(0, 0, 0, 0.57)")
+		h2 YEAH...NO.
+
+section
+	h3 Arrays
+	h5: i No mutating operation, ES6 Style ;)
+	pre
+		code
+			|  const oddNumsToTen = [1, 3, 5, 7, 8, 9];
+			|  const oddNumsToEleven = [...oddNumsToTen, 11]; 
+			|  console.log(oddNumsToTen); // [1, 3, 5, 7, 8, 9]
+			|  console.log(oddNumsToEleven); // [1, 3, 5, 7, 8, 9, 11]
+	
+	h5.fragment Or the old hacky ES5 way!
+	pre.fragment
+		code
+			|  const oddNumsToTen = [1, 3, 5, 7, 8, 9];
+			|  const oddNumsToEleven = oddNumsToTen.slice().push(11);
+			|  console.log(oddNumsToTen); // [1, 3, 5, 7, 8, 9]
+			|  console.log(oddNumsToEleven); // [1, 3, 5, 7, 8, 9, 11]
+
+section
+	h3 Okay, but why should I care?
+	h5 Some Pros:
+	ul
+		li  Thread Safety (No shared state!);
+		li  Easier to trace bugs;
+		li  Easier reasoning about code - It always means the same thing;
+	h5 And cons:
+	ul
+		li Our perception of the world is 
+			i innevitably
+			|  one of mutability;
+		li Objects that are allowed to change makes the code harder to change;
+		li (???)
+
+section(data-background-image="img/thumbs-up.gif")
+	section(data-background-color="rgba(0, 0, 0, 0.6)")
+		h2 (y)
+section
+	h2 All those concepts sound great.
+	h3 How to apply it?
