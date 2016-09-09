@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Immutability and Pure Functions</title>
+    <meta name="description" content="Immutability and Pure Functions: You can't touch this">
+    <meta name="author" content="You">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="img/qualy-presenter.png">
+    <meta property="og:description" content="A quick rundown the benefits of Immutability and Pure Functions">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section> 
+          <h1> <b>Immutability</b></h1>
+          <h2>and Pure Functions</h2>
+          <h5>by <a href="http://twitter.com/joaolucasluc">@joaolucasluc</a></h5>
+        </section>
+        <section>
+          <h1>What is Mutability?</h1>
+          <div class="fragment">
+            <h4>Mutability <i>(ˈmjuː.tə.bəl)</i></h4>
+            <p>The quality of being mutable, or subject to change or alteration, either in form, state, or essential character; susceptibility of change; </p>
+            <footer><i>Webster's Revised Unabridged Dictionary</i></footer>
+          </div>
+        </section>
+        <section>
+          <h1>What is <b>Immutability?</b></h1>
+          <div class="fragment">
+            <h4>Immutability <i>(ɪˈmjuː.tə.bəl)</i></h4>
+            <p>The state or quality of being immutable; immutableness. </p>
+            <footer><i>Webster's Revised Unabridged Dictionary</i></footer>
+          </div>
+        </section>
+        <section data-background-image="img/yo-hammer.gif">
+          <section data-background-color="rgba(0, 0, 0, 0.57)">
+            <h2>Refactoring this definition:</h2>
+            <h2><b>You can't touch this.</b></h2>
+          </section>
+        </section>
+        <section>
+          <h2><b>Immutability is not about just forbidding change.</b></h2>
+          <h3>It is about handling change in a controlled fashion.</h3>
+        </section>
+        <section>
+          <h2>Immutability in JS isn't new stuff.</h2><span class="fragment">In fact it's been on ECMAScript since 1997 [1]</span><img src="img/string-97.png" class="fragment"><small><a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf">[1] ECMAScript: A general purpose, cross-platform programming language  </a></small>
+        </section>
+        <section>
+          <h2>All JS Primitives are Immutable.</h2>
+        </section>
+        <section>
+          <h3>Strings</h3>
+          <pre><code> let name = "Paulo Escobar";
+ name[2] = "b";
+ console.log(name); // Paulo Escobar</code></pre>
+        </section>
+        <section>
+          <h3>Numbers </h3>
+          <pre><code> let num1 = 2;
+ let num2 = 3;
+ num2 - num1
+ console.log(num2); // 3</code></pre>
+        </section>
+        <section>
+          <h3>Boolean</h3>
+          <pre><code> let truthful = true;
+ truthful.length = 4; 
+ console.log(truthful); // true</code></pre>
+        </section>
+        <section>
+          <h3>Symbols</h3>
+          <pre><code> let martha = Symbol('batSignal');
+ martha.toString(); 
+ console.log(truthful); // 'Symbol(batSignal)' (String)</code></pre>
+        </section>
+        <section>
+          <h3>Arrays</h3>
+          <h5><i>Well, Arrays...</i></h5>
+          <pre><code> let oddNumsToTen = [1, 3, 5, 7, 8, 9];
+ let oddNumsToEleven = oddNumsToTen.push(11); 
+ console.log(oddNumsToTen); // [1, 3, 5, 7, 8, 9, 11]</code></pre>
+        </section>
+        <section data-background-image="img/no.gif">
+          <section data-background-color="rgba(0, 0, 0, 0.57)">
+            <h2>YEAH...NO.</h2>
+          </section>
+        </section>
+        <section>
+          <h3>Arrays</h3>
+          <h5><i>No mutating operation, ES6 Style ;)</i></h5>
+          <pre><code> const oddNumsToTen = [1, 3, 5, 7, 8, 9];
+ const oddNumsToEleven = [...oddNumsToTen, 11]; 
+ console.log(oddNumsToTen); // [1, 3, 5, 7, 8, 9]
+ console.log(oddNumsToEleven); // [1, 3, 5, 7, 8, 9, 11]</code></pre>
+          <h5 class="fragment">Or the old hacky ES5 way!</h5>
+          <pre class="fragment"><code> const oddNumsToTen = [1, 3, 5, 7, 8, 9];
+ const oddNumsToEleven = oddNumsToTen.slice().push(11);
+ console.log(oddNumsToTen); // [1, 3, 5, 7, 8, 9]
+ console.log(oddNumsToEleven); // [1, 3, 5, 7, 8, 9, 11]</code></pre>
+        </section>
+        <section>
+          <h3>Okay, but why should I care?</h3>
+          <h5>Some Pros:</h5>
+          <ul>
+            <li> Thread Safety (No shared state!);</li>
+            <li> Easier to trace bugs;</li>
+            <li> Easier reasoning about code - It always means the same thing;</li>
+            <li> Failure Atomicity - If code breaks in the middle of sth, there's hope;</li>
+          </ul>
+          <h5>And cons:</h5>
+          <ul>
+            <li>Our perception of the world is <i>innevitably</i> one of mutability;</li>
+            <li>Copying lots of data may have performance impacts</li>
+            <li>(???)</li>
+          </ul>
+        </section>
+        <section data-background-image="img/thumbs-up.gif">
+          <section data-background-color="rgba(0, 0, 0, 0.6)">
+            <h2>(y)</h2>
+          </section>
+        </section>
+        <section>
+          <h2><b>That stuff sounds awesome, aye?</b></h2>
+          <h3>How to apply it?</h3>
+        </section>
+        <section data-background-color="#898989"><img src="img/immutable-logo.png" style="border:none; box-shadow:none">
+          <h4>by Facebook</h4>
+          <h5>https://facebook.github.io/immutable-js/</h5>
+          <pre><code> const map1 = Immutable.Map({a:1, b:2, c:3});
+ const map2 = map1.set('b', 50);
+ map1.get('b'); // 2
+ map2.get('b'); // 50</code></pre>
+        </section>
+        <section data-background-color="#63B132">
+          <h2><b>Mori</b></h2>
+          <h4>Clojure's data structures for vanilla JS!</h4>
+          <h5>http://swannodette.github.io/mori/</h5>
+          <pre><code class="javascript">const nums = mori.seq([1,2,3,4,5,5,7]);
+const remainingNums = mori.drop(2, nums);
+mori.clj_to_js(nums); // [1,2,3,4,5,5,7]
+mori.clj_to_js(remainingNums); // [3,4,5,5,7]</code></pre>
+        </section>
+        <section data-background-color="#0E5081">
+          <h2><b>Seamless Immutable</b></h2>
+          <h4>Vanilla compatibility focused Immutable data structures. </h4>
+          <h5>https://github.com/rtfeldman/seamless-immutable</h5>
+          <pre><code class="javascript">const bestHeroes = Immutable(["Spider Man", "Captain America", "Green Lantern");
+bestHeroes[2] = "Batman";
+console.log(bestHeroes[2]) // Green Lantern</code></pre>
+        </section>
+        <section>
+          <h5>But how can we make the most out of Immutability?</h5>
+          <h3>Featuring Immutability's best friends:</h3>
+        </section>
+        <section data-background-image="img/batman-robin.gif">
+          <section data-background-color="rgba(0, 0, 0, 0.5)">
+            <h1><b>Pure Functions!</b></h1>
+          </section>
+        </section>
+        <section>
+          <h3>They will<b>always </b>do what you expect.</h3>
+          <ul>
+            <li class="fragment">1 + 2 = 3</li>
+            <li class="fragment">1 + 2 = 3</li>
+            <li class="fragment">`add(1, 2)` // 3</li>
+            <li class="fragment">`add(1, 3)` // 4</li>
+            <li class="fragment">`add(1, 2)` // 3</li>
+            <li class="fragment">`add(1, 4)` // 10 - What if???</li>
+          </ul>
+        </section>
+        <section>
+          <h3>To be considered pure, a function has to:</h3>
+          <h4>
+            <ul>
+              <li class="fragment"> Always have the same results given the same arguments (therefore, not depend on external information);</li>
+              <li class="fragment"> Not result in any side-effects, such as *mutation*</li>
+            </ul>
+          </h4>
+        </section>
+        <section>
+          <h3>Impure:</h3>
+          <pre><code class="javascript">const cart = [];
+const addToCart = (item) => {
+  cart.push(item);
+};</code></pre>
+          <h3>Pure:</h3>
+          <pre><code class="javascript">const addToCart = (cart, item) => {
+  const newCart = _.cloneDeep(cart); //  lodash ftw ;)
+  newCart.push(item);
+  return newCart;
+};</code></pre>
+        </section>
+        <section data-background-image="img/cow.jpg">
+          <section data-background-color="rgba(0, 0, 0, 0.5)">
+            <h2>You can think of Pure + Immutable as UHT Milk.</h2>
+            <h4>Doesn't get manipulated from time of packaging to your table.</h4>
+          </section>
+        </section>
+        <section data-background-image="img/veggies.jpg">
+          <section data-background-color="rgba(0, 0, 0, 0.5)">
+            <h2>And Mutable + Impure as fresh veggies</h2>
+            <h4>Who knows where they been to, if they are rotting or who touched them?</h4>
+          </section>
+        </section>
+        <section data-background-image="">
+          <section data-background-color="rgba(0, 0, 0, 0.5)"></section>
+          <h1>Accountant's don't use erasers</h1>
+          <h2>Why should developers?</h2>
+        </section>
+        <section data-background-image="img/trump.gif">
+          <section data-background-color="rgba(0, 0, 0, 0.5)"></section>
+          <h1>What now?</h1>
+        </section>
+        <section>
+          <h2>Great resources</h2>
+          <h3>i've been learning from</h3><a href="https://auth0.com/blog/intro-to-immutable-js/">Introduction to Immutable.js and Functional Programming Concepts</a><a href="https://www.youtube.com/watch?v=mS264h8KGwk">Immutability, interactivity & JavaScript (Talk)</a><a href="https://medium.com/javascript-scene/the-dao-of-immutability-9f91a70c88cd#.rmrjyz3eb">The Dao of Immutability</a><a href="https://www.youtube.com/watch?v=pi4PZi34hLk">Immutable JavaScript (Talk)</a><a href="http://cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf">Immutability Changes Everything (Paper, by Pat Helland)</a><br>
+          <h4>Thanks for watching!</h4>
+        </section>
+      </div>
+    </div>
+    <script src="js/vendor/head.min.js"></script>
+    <script src="js/vendor/reveal.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
