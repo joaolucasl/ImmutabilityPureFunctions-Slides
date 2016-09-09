@@ -1,5 +1,58 @@
+
 section
+  h5 But how can we make the most out of Immutability?
   h3 Featuring Immutability's best friends:
-section(data-background-image="img/yo-hammer.gif")
-    section(data-background-color="rgba(0, 0, 0, 0.57)")
-      h2: b Pure Functions!
+section(data-background-image="img/batman-robin.gif")
+    section(data-background-color="rgba(0, 0, 0, 0.5)")
+      h1: b Pure Functions!
+section
+  h3 They will
+    b always 
+    | do what you expect.
+  ul
+    li.fragment 1 + 2 = 3
+    li.fragment 1 + 2 = 3
+    li.fragment `add(1, 2)` // 3
+    li.fragment `add(1, 3)` // 4
+    li.fragment `add(1, 2)` // 3
+    li.fragment `add(1, 4)` // 10 - What if???
+
+section
+  h3 To be considered pure, a function has to:
+  h4: ul
+    li.fragment  Always have the same results given the same arguments (therefore, not depend on external information);
+    li.fragment  Not result in any side-effects, such as *mutation*
+
+section
+
+  h3 Impure:
+  pre
+    code(class="javascript")
+      | const cart = [];
+      | const addToCart = (item) => {
+      |   cart.push(item);
+      | };
+  h3 Pure:
+  pre
+    code(class="javascript")
+      | const addToCart = (cart, item) => {
+      |   const newCart = _.cloneDeep(cart); //  lodash ftw ;)
+      |   newCart.push(item);
+      |   return newCart;
+      | };
+
+
+section(data-background-image="img/cow.jpg")
+    section(data-background-color="rgba(0, 0, 0, 0.5)")
+      h2 You can think of Pure + Immutable as UHT Milk.
+      h4 Doesn't get manipulated from time of packaging to your table.
+
+section(data-background-image="img/veggies.jpg")
+    section(data-background-color="rgba(0, 0, 0, 0.5)")
+      h2 And Mutable + Impure as fresh veggies
+      h4 Who knows where they been to, if they are rotting or who touched them?
+
+section(data-background-image="")
+    section(data-background-color="rgba(0, 0, 0, 0.5)")
+    h1 Accountant's don't use erasers
+    h2 Why should developers?
