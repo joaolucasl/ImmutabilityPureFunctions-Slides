@@ -34,7 +34,7 @@ section
     code
       |  let martha = Symbol('batSignal');
       |  martha.toString(); 
-      |  console.log(truthful); // 'Symbol(batSignal)' (String)
+      |  console.log(martha); // 'Symbol(batSignal)' (String)
 
 section
   h3 Arrays
@@ -117,6 +117,6 @@ section(data-background-color="#0E5081")
   h5 https://github.com/rtfeldman/seamless-immutable
   pre
     code(class="javascript")
-      | const bestHeroes = Immutable(["Spider Man", "Captain America", "Green Lantern");
+      | const bestHeroes = Immutable(["Spider Man", "Captain America", "Green Lantern"]);
       | bestHeroes[2] = "Batman";
       | console.log(bestHeroes[2]) // Green Lantern
